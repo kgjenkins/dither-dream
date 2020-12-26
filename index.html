@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>dither</title>
+<meta http-equiv="Content-type" content="text/html; charset=UTF-8" />
+<link rel='stylesheet' type='text/css' href='style.css'>
+</head>
+<body>
+
+<h1>dither: variations on the Floyd-Steinberg dithering algorithm</h1>
+
+<section id='display-section'>
+  Image URL: <input id='url' type='text' value='image/vanitas.png' />
+  <br>
+  <canvas id='screen' width=512 height=512></canvas>
+</section>
+
+<section id='dashboard-section'>
+    <input id='a' value='7' type='range' step='1' min='-24' max='24' />
+    <label id='a-label'>7</label> (east)
+    <br>
+    <input id='b' value='3' type='range' step='1' min='-24' max='24' />
+    <label id='b-label'>3</label> (southwest)
+    <br>
+    <input id='c' value='5' type='range' step='1' min='-24' max='24' />
+    <label id='c-label'>5</label> (south)
+    <br>
+    <input id='d' value='1' type='range' step='1' min='-24' max='24' />
+    <label id='d-label'>1</label> (southeast)
+    <br>
+    <input id='contrast' value='0' type='range' step='0.1' min='-1' max='1' />
+    <label id='contrast-label'>0</label> (contrast)
+ </section>
+
+ <!-- <video id='video' onclick='snapshot(this);' width=512 height=512 controls autoplay>-->
+
+<script src='dither.js'></script>
+
+</body>
+</html>
+
