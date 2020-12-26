@@ -1,5 +1,14 @@
 # dither
 
+Dither is a tool for exploring variations on the Floyd-Steinberg dithering algorithm.
+
+Try the [online demo](https://kgjenkins.github.io/dither/)
+
+---
+
+
+# What is the Floyd-Steinberg algorithm?
+
 The [Floyd-Steinberg dithering algorithm](https://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering) is a well-known method for reducing an image into a reduced set of colors while attempting to minimize perceptual changes.
 
 Dithering is particulary useful when converting to a bitonal image that only has two colors (like black and white).  For example, consider this original full-color image:
@@ -70,4 +79,7 @@ If we use even larger negative values, and increase the contrast of the original
 
 ![glitch animation](image/glitch.gif)
 
-[Try the online demo](https://kgjenkins.github.io/dither/) to play with parameters and see the results for yourself!
+
+# Let me try!
+
+See the [online demo](https://kgjenkins.github.io/dither/) to play with parameters and see the results for yourself!
