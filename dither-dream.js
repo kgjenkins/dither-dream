@@ -51,7 +51,7 @@ function randomize() {
     document.getElementById(p + '-label').innerHTML = v;
     weights[i] = v;
   }
-  var c = randInt(-5,10)/10;
+  var c = randInt(-50,100)/100;
   document.getElementById('contrast').value = c;
   document.getElementById('contrast-label').innerHTML = c;
   dither();
