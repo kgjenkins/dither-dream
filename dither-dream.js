@@ -39,7 +39,31 @@ function initialize() {
 
 };
 
-function reset(target) {
+function randomize() {
+  // randomize all the values, but set contrast to 0
+  var params = 'a b c d'.split(' ');
+  for (var i=0; i<params.length; i++) {
+    var p = params[i];
+    var input = document.getElementById(p);
+    // randomize only within the middle half of the range
+    var v = randInt(input.min/2, input.max/2);
+    input.value = v;
+    document.getElementById(p + '-label').innerHTML = v;
+    weights[i] = v;
+  }
+  var c = randInt(-5,10)/10;
+  document.getElementById('contrast').value = c;
+  document.getElementById('contrast-label').innerHTML = c;
+  dither();
+}
+
+function randInt(min, max) {
+    min = Math.ceil(min);
+    max = Math.floor(max);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+function reset() {
   //reset to default values
   document.getElementById('a').value = 7;
   document.getElementById('a-label').innerHTML = 7;
@@ -53,7 +77,22 @@ function reset(target) {
   document.getElementById('contrast-label').innerHTML = 0;
   weights = [7, 3, 5, 1];
   dither();
-  target.blur();
+}
+
+function toggleOriginal() {
+  if (! screenctx.showing_original) {
+    // store current dither
+    screenctx.toggle = screenctx.getImageData(0, 0, 512, 512);
+
+    // display original image
+    var scale = 512/img.width;
+    screenctx.drawImage(img, 0, 0, Math.floor(img.width*scale), Math.floor(img.height*scale));
+    screenctx.showing_original = true;
+  }
+  else {
+    screenctx.putImageData(screenctx.toggle, 0, 0);
+    screenctx.showing_original = false;
+  }
 }
 
 var img = new Image();
@@ -83,6 +122,7 @@ function dither() {
   data = grayscale(data);
   data = floyd_steinberg(data, 512, 512);
   screenctx.putImageData(imagedata, 0, 0);
+  screenctx.showing_original = false;
 }
 
 function grayscale(data) {
