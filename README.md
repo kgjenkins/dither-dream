@@ -16,16 +16,16 @@ But using Floyd-Steinberg dithering, we can preserve more information about the 
 
 # How does it work?
 
-The Floyd-Steinberg algorithm is relatively simple.  It scans the image on pixel at a time, scanning the top line from left to right, then the next line, etc. until it reaches the bottom.  For a bitonal dither, we first convert the whole image to grayscale, where each pixel is has a luminosity (perceived brightness) value of 0 to 255.
+The Floyd-Steinberg algorithm is relatively simple.  It scans the image one pixel at a time, scanning the top line from left to right, then the next line, etc. until it reaches the bottom.  For a bitonal dither, we first need to convert the whole image to grayscale, so that each pixel is has a luminosity (perceived brightness) value of 0 to 255.
 
-The algorithm then looks at the value of each pixel.  Luminosity alues 0-127 (<50%) become 0 (black) and values 128-255 (>50%) become 255 (white).  So a value of 16 would become 0.  The "error" is calculated to be the difference between the old and new values, which would be 16 in this case.  This error is then distributed across the neighboring pixels that have not yet been scanned, according to the following weights as specified by Floyd and Steinberg:
+As the the algorithm examines each pixel, values 0-127 (<50%) become 0 (black) and values 128-255 (>50%) become 255 (white).  So a dark value of 16 would become black 0.  The "error" is calculated as the difference between the old and new values, which would be 16 in this case.  This error is then distributed across the neighboring pixels that have not yet been scanned, according to the following weights as specified by Floyd and Steinberg:
 
 | x | x | x |
 |:-:|:-:|:-:|
 | **x** | @ | 7 |
 | 3 | 5 | 1 |
 
-As the scan progresses, in a region of dark (but not black) pixels, this error will eventually accumulate enough to have an occasional white pixel.  Part of the beauty of the result is the way these occasional points are spaced out, sometimes appearing to be random and sometimes with a discernable pattern.
+As the scan progresses, in a region of dark (but not completely black) pixels, this error will eventually accumulate enough to have an occasional white pixel.  Part of the beauty of the result is the way that these occasional points are spaced out, sometimes appearing to be random and sometimes with a discernable pattern.
 
 ![dithering detail](image/detail.png)
 
@@ -41,20 +41,18 @@ I was curious why or how the weighting matrix above was calculated.  Floyd-Stein
 
 I wanted to experiment with other variations of weights.  Maybe other values would result in unpleasant or rigid patterns of dots, and 7,3,5,1 was the only way to have a balanced output?  Well, let's try some variations...
 
-![7.3.5.1](ex1.dither.7.3.5.1.png) 7, 3, 5, 1 (Floyd-Steinberg)
-![4,4,4,4](ex1.dither.4.4.4.4.png) 4, 4, 4, 4 (equal)
-![8,0,8,0](ex1.dither.8.0.8.0.png) 8, 0, 8, 0 (right and down)
-![0,8,0,8](ex1.dither.0.8.0.8.png) 0, 8, 0, 8 (diagonals only)
-![8.8.0.0](ex1.dither.8.8.0.0.png) 8, 8, 0, 0
+![7.3.5.1](image/ex1.dither.7.3.5.1.png) 7, 3, 5, 1 (Floyd-Steinberg)
+![4,4,4,4](image/ex1.dither.4.4.4.4.png) 4, 4, 4, 4 (equal)
+![8,0,8,0](image/ex1.dither.8.0.8.0.png) 8, 0, 8, 0 (right and down)
+![0,8,0,8](image/ex1.dither.0.8.0.8.png) 0, 8, 0, 8 (diagonals only)
+![8.8.0.0](image/ex1.dither.8.8.0.0.png) 8, 8, 0, 0
 
 
-![0.8.0.-8](ex1.dither.0.8.0.-8.png) 0, 8, 0, -8
-![-8.0.4.0](ex1.dither.-8.0.4.0.png) -8, 0, 4, 0
-![-4.4.12.4](ex1.dither.-4.4.12.4.png) -4, 4, 12, 4
-![-17.0.0.-17](ex1.dither.-17.0.0.-17.png) -17, 0, 0, -17
+![0.8.0.-8](image/ex1.dither.0.8.0.-8.png) 0, 8, 0, -8
+![-8.0.4.0](image/ex1.dither.-8.0.4.0.png) -8, 0, 4, 0
+![-4.4.12.4](image/ex1.dither.-4.4.12.4.png) -4, 4, 12, 4
+![-17.0.0.-17](image/ex1.dither.-17.0.0.-17.png) -17, 0, 0, -17
 
-
-TODO: add images of variants
 
 TODO: add animation of a range of values leading to complete degradation
 
