@@ -1,8 +1,8 @@
-# dither
+# dither-dream
 
-Dither is a tool for exploring variations on the Floyd-Steinberg dithering algorithm.
+Dither-dream is a tool for exploring variations on the Floyd-Steinberg dithering algorithm.
 
-Try the [online demo](https://kgjenkins.github.io/dither/)
+Try the [Dither-dream online demo](https://kgjenkins.github.io/dither-dream/)
 
 ---
 
@@ -82,4 +82,4 @@ If we use even larger negative values, and increase the contrast of the original
 
 # Let me try!
 
-See the [online demo](https://kgjenkins.github.io/dither/) to play with parameters and see the results for yourself!
+See the [Dither-dream online demo](https://kgjenkins.github.io/dither-dream/) to play with parameters and see the results for yourself!
