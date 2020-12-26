@@ -28,7 +28,7 @@ But using Floyd-Steinberg dithering, we can preserve more information about the 
 
 The Floyd-Steinberg algorithm is relatively simple.  It scans the image one pixel at a time, scanning the top line from left to right, then the next line, etc. until it reaches the bottom.  For a bitonal dither, it's easier if we first convert the whole image to grayscale, so that each pixel has a luminosity (perceived brightness) value of 0 to 255.
 
-As the the algorithm examines each pixel, values 0-127 (<50%) become 0 (black) and values 128-255 (>50%) become 255 (white).  So a dark value of 16 would become black 0.  The "error" is calculated as the difference between the old and new values, which would be 16 in this case.  This error is then distributed across the neighboring pixels that have not yet been scanned, according to the following weights as specified by Floyd and Steinberg:
+As the the algorithm examines each pixel, and modifies the pixel so that darker pixels with values 0-127 (<50%) become 0 (black) and light pixels with values 128-255 (>50%) become 255 (white).  For example, a very dark pixel with a value of 16 would become black 0.  Then the "error" is calculated as the difference between the old and new values, which would be 16 in this case.  This error is then distributed across the neighboring pixels that have not yet been scanned, according to the following weights as specified by Floyd and Steinberg:
 
 | x | x | x |
 |:-:|:-:|:-:|
