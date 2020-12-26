@@ -4,15 +4,14 @@ The [Floyd-Steinberg dithering algorithm](https://en.wikipedia.org/wiki/Floyd%E2
 
 Dithering is particulary useful when converting to a bitonal image that only has two colors (like black and white).  For example, consider this original full-color image:
 
-![original color image](image/sample.original.png)
+![original color image](image/ex1.original.png)
 
 If we convert it to a bitonal black and white based on a threshold luminosity of 50%, we get a result that loses much of the original detail:
 
-![bitonal image using 50% threshold](image/sample.bitonal.png)
+![bitonal image using 50% threshold](image/ex1.bitonal.png)
 
-But using Floyd-Steinberg dithering, we can preserve more information about the brightness of the original image.  This example is magnified 400%, so it looks very pixelated, but if you squint your eyes, or look at it from a distance, it's not too bad.
-
-![dithered image](image/sample.dither.7.3.5.1.png)
+But using Floyd-Steinberg dithering, we can preserve more information about the brightness of the original image.  It's not nearly as detailed as the original, but it does preserve the general brightness for different regions of the image.
+![dithered image](image/ex1.dither.7.3.5.1.png)
 
 
 # How does it work?
@@ -40,7 +39,20 @@ I was curious why or how the weighting matrix above was calculated.  Floyd-Stein
 | **x** | @ | 7/16 |
 | 3/16 | 5/16 | 1/16 |
 
-I wanted to experiment with other variations of weights.  Maybe other values would result in unpleasant or rigid patterns of dots, and the 7, 3, 5, 1 was the only way to have a balanced output?  Well, let's try some variations...
+I wanted to experiment with other variations of weights.  Maybe other values would result in unpleasant or rigid patterns of dots, and 7,3,5,1 was the only way to have a balanced output?  Well, let's try some variations...
+
+![7.3.5.1](ex1.dither.7.3.5.1.png) 7, 3, 5, 1 (Floyd-Steinberg)
+![4,4,4,4](ex1.dither.4.4.4.4.png) 4, 4, 4, 4 (equal)
+![8,0,8,0](ex1.dither.8.0.8.0.png) 8, 0, 8, 0 (right and down)
+![0,8,0,8](ex1.dither.0.8.0.8.png) 0, 8, 0, 8 (diagonals only)
+![8.8.0.0](ex1.dither.8.8.0.0.png) 8, 8, 0, 0
+
+
+![0.8.0.-8](ex1.dither.0.8.0.-8.png) 0, 8, 0, -8
+![-8.0.4.0](ex1.dither.-8.0.4.0.png) -8, 0, 4, 0
+![-4.4.12.4](ex1.dither.-4.4.12.4.png) -4, 4, 12, 4
+![-17.0.0.-17](ex1.dither.-17.0.0.-17.png) -17, 0, 0, -17
+
 
 TODO: add images of variants
 
