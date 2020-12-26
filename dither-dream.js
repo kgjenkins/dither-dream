@@ -95,6 +95,33 @@ function toggleOriginal() {
   }
 }
 
+function dragOver(e) {
+  e.preventDefault();
+}
+
+function dropFile(e) {
+  e.preventDefault();
+  if (e.dataTransfer.files) {
+    // assume it is only file
+    var file = e.dataTransfer.files[0];
+    img = new Image();
+    img.file = file;
+    var reader = new FileReader();
+    reader.onload=(function(f) {
+      return function(e) {
+        f.onload=function() {
+          var scale = 512/f.width;
+          screenctx.drawImage(f, 0, 0, Math.floor(img.width*scale), Math.floor(img.height*scale));
+          dither();
+        }
+        f.src = e.target.result;
+      };
+    })(img);
+    reader.readAsDataURL(file);
+  }
+}
+
+
 var img = new Image();
 var screenctx = document.getElementById('screen').getContext('2d');
 
