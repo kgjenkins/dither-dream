@@ -11,6 +11,7 @@ If we convert it to a bitonal black and white based on a threshold luminosity of
 ![bitonal image using 50% threshold](image/ex1.bitonal.png)
 
 But using Floyd-Steinberg dithering, we can preserve more information about the brightness of the original image.  It's not nearly as detailed as the original, but it does preserve the general brightness for different regions of the image.
+
 ![dithered image](image/ex1.dither.7.3.5.1.png)
 
 
@@ -44,26 +45,29 @@ I wanted to experiment with other variations of weights.  Maybe other values wou
 Here are several ways to split up the 1/16s across the four available directions:
 
 ![7.3.5.1](image/ex1.dither.7.3.5.1.png) 7, 3, 5, 1 (Floyd-Steinberg)
+
 ![4,4,4,4](image/ex1.dither.4.4.4.4.png) 4, 4, 4, 4 (equal distribution)
+
 ![8,0,8,0](image/ex1.dither.8.0.8.0.png) 8, 0, 8, 0 (right and down only)
+
 ![0,8,0,8](image/ex1.dither.0.8.0.8.png) 0, 8, 0, 8 (diagonals only)
+
 ![8.8.0.0](image/ex1.dither.8.8.0.0.png) 8, 8, 0, 0 (right and down-left only)
 
-What if we use some negative numbers?  If we use a negative weight for the right direction, we'll end up with some long horizontal lines, but since the the total is still 16, the result still gives a pretty good sense of the general brightness of different regions in the image.
+What if we use some negative numbers?  If we use a negative weight for the rightward direction, we'll end up with some long horizontal lines, but since the the total is still 16, the result still gives a pretty good sense of the general brightness of different regions in the image.
 
 ![-4.4.12.4](image/ex1.dither.-4.4.12.4.png) -4, 4, 12, 4
 
-Now, what if we eliminate the constraint to add up to 16?  If the total is less than 16, the result will be somewhere between a dither and a naive bitonal (0, 0, 0, 0) image.
+Now, what if we eliminate the constraint that the total should be 16?  If the total is less than 16, the result will be somewhere between a dither and a naive bitonal (0, 0, 0, 0) image.
 
 ![-8.0.4.0](image/ex1.dither.-8.0.4.0.png) -8, 0, 4, 0
+
 ![0.8.0.-8](image/ex1.dither.0.8.0.-8.png) 0, 8, 0, -8
 
 If we use even larger negative values, and increase the contrast of the original image, things really start to get interesting.  Here the results begin to resemble phenomena like the [Sierpinski triangle](https://en.wikipedia.org/wiki/Sierpi%C5%84ski_triangle) and other types of [elementary cellular automata](https://en.wikipedia.org/wiki/Elementary_cellular_automaton#Random_initial_state)
 
 ![-17.0.0.-17](image/ex1.dither.-17.0.0.-17.png) -17, 0, 0, -17
 
+![glitch animation](image/glitch.gif)
 
-TODO: add animation of a range of values leading to complete degradation
-
-
-[Try the online demo](https://kgjenkins.github.io/dither/)
+[Try the online demo](https://kgjenkins.github.io/dither/) to play with parameters and see the results for yourself!
