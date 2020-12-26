@@ -9,9 +9,9 @@ Try the [Dither-dream online demo](https://kgjenkins.github.io/dither-dream/)
 
 # What is the Floyd-Steinberg algorithm?
 
-The [Floyd-Steinberg dithering algorithm](https://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering) is a well-known method for reducing an image into a reduced set of colors while attempting to minimize perceptual changes.
+The [Floyd-Steinberg dithering algorithm](https://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering) is a method for reducing an image into a reduced set of colors while attempting to minimize perceptual changes.
 
-Dithering is particulary useful when converting to a bitonal image that only has two colors (like black and white).  For example, consider this original full-color image:
+Dithering is particulary useful when converting to a bitonal image that only has two colors (like black and white).  For example, consider this original full-color image ("Vanitas with the Spinario" by 17th-century Dutch artist [Pieter Claesz](https://en.wikipedia.org/wiki/Pieter_Claesz)):
 
 ![original color image](image/ex1.original.png)
 
@@ -26,13 +26,13 @@ But using Floyd-Steinberg dithering, we can preserve more information about the 
 
 # How does it work?
 
-The Floyd-Steinberg algorithm is relatively simple.  It scans the image one pixel at a time, scanning the top line from left to right, then the next line, etc. until it reaches the bottom.  For a bitonal dither, we first need to convert the whole image to grayscale, so that each pixel is has a luminosity (perceived brightness) value of 0 to 255.
+The Floyd-Steinberg algorithm is relatively simple.  It scans the image one pixel at a time, scanning the top line from left to right, then the next line, etc. until it reaches the bottom.  For a bitonal dither, it's easier if we first convert the whole image to grayscale, so that each pixel is has a luminosity (perceived brightness) value of 0 to 255.
 
 As the the algorithm examines each pixel, values 0-127 (<50%) become 0 (black) and values 128-255 (>50%) become 255 (white).  So a dark value of 16 would become black 0.  The "error" is calculated as the difference between the old and new values, which would be 16 in this case.  This error is then distributed across the neighboring pixels that have not yet been scanned, according to the following weights as specified by Floyd and Steinberg:
 
 | x | x | x |
 |:-:|:-:|:-:|
-| **x** | @ | 7 |
+| **x** | **@** | 7 |
 | 3 | 5 | 1 |
 
 As the scan progresses, in a region of dark (but not completely black) pixels, this error will eventually accumulate enough to have an occasional white pixel.  Part of the beauty of the result is the way that these occasional points are spaced out, sometimes appearing to be random and sometimes with a discernable pattern.
@@ -63,11 +63,13 @@ Here are several ways to split up the 1/16s across the four available directions
 
 ![8.8.0.0](image/ex1.dither.8.8.0.0.png) 8, 8, 0, 0 (right and down-left only)
 
-What if we use some negative numbers?  If we use a negative weight for the rightward direction, we'll end up with some long horizontal lines, but since the the total is still 16, the result still gives a pretty good sense of the general brightness of different regions in the image.
+As you can see, some of these combinations tend to create artifacts that distract from the original image.  Floyd and Steinberg probably picked 7,3,5,1 because it tends to have the best results.  But maybe there are other combinations that deliver equally good results.
+
+Now, what if we were to use some negative numbers?  If we use a negative weight for the rightward direction, we'll end up with some long horizontal lines, but since the the total is still 16, the result still gives a pretty good sense of the general brightness of different regions in the image.
 
 ![-4.4.12.4](image/ex1.dither.-4.4.12.4.png) -4, 4, 12, 4
 
-Now, what if we eliminate the constraint that the total should be 16?  If the total is less than 16, the result will be somewhere between a dither and a naive bitonal (0, 0, 0, 0) image.
+And what if we eliminate the constraint that the total should be 16?  If the total is less than 16, the result will be somewhere between a dither and a naive bitonal (0, 0, 0, 0) image.
 
 ![-8.0.4.0](image/ex1.dither.-8.0.4.0.png) -8, 0, 4, 0
 
@@ -77,9 +79,9 @@ If we use even larger negative values, and increase the contrast of the original
 
 ![-17.0.0.-17](image/ex1.dither.-17.0.0.-17.png) -17, 0, 0, -17
 
-![glitch animation](image/glitch.gif)
+![glitch animation](image/glitch.gif) glitching the algorithm through a range of values
 
 
-# Let me try!
+# Your turn
 
-See the [Dither-dream online demo](https://kgjenkins.github.io/dither-dream/) to play with parameters and see the results for yourself!
+See the [Dither-dream online demo](https://kgjenkins.github.io/dither-dream/) to play with the parameters and see the results for yourself!

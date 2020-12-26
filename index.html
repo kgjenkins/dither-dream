@@ -9,30 +9,46 @@
 
 <h1>dither-dream: variations on the Floyd-Steinberg dithering algorithm</h1>
 
+<!--
+Image URL:
+-->
+<input id='url' type='hidden' value='image/vanitas.png' />
+
 <section id='display-section'>
-  Image URL: <input id='url' type='text' value='image/vanitas.png' />
-  <br>
   <canvas id='screen' width=512 height=512></canvas>
 </section>
 
 <section id='dashboard-section'>
+  <div>
+    For details about how this works, see the README at
+    <br>
+    <a href='https://github.com/kgjenkins/dither-dream'>https://github.com/kgjenkins/dither-dream</a>
+  </div>
+
+  <div>
+    Weights for distributing error to neighboring pixels:
+    <br>
     <input id='a' value='7' type='range' step='1' min='-24' max='24' />
-    <label id='a-label'>7</label> (east)
+    <label id='a-label'>7</label> (right)
     <br>
     <input id='b' value='3' type='range' step='1' min='-24' max='24' />
-    <label id='b-label'>3</label> (southwest)
+    <label id='b-label'>3</label> (down left)
     <br>
     <input id='c' value='5' type='range' step='1' min='-24' max='24' />
-    <label id='c-label'>5</label> (south)
+    <label id='c-label'>5</label> (down)
     <br>
     <input id='d' value='1' type='range' step='1' min='-24' max='24' />
-    <label id='d-label'>1</label> (southeast)
+    <label id='d-label'>1</label> (down right)
+    <br>
     <br>
     <input id='contrast' value='0' type='range' step='0.1' min='-1' max='1' />
     <label id='contrast-label'>0</label> (contrast)
- </section>
+    <br>
+    <br>
+    <button id='reset' onclick='reset(this)'>reset to default values</button>
+  </div>
 
- <!-- <video id='video' onclick='snapshot(this);' width=512 height=512 controls autoplay>-->
+</section>
 
 <script src='dither-dream.js'></script>
 

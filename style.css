@@ -1,7 +1,8 @@
-body { background:#000 ; color:#ff5 ; font-family:"Noto Mono", monospace ; font-size:11pt ; margin:6px }
+a, a:visited { color:#ff5 }
+body { background:#000 ; color:#fff ; font-family:"Noto Mono", monospace ; font-size:11pt ; margin:6px }
 code { color:#ff5 ; font-size:100% }
 
-button { background:#ff5 ; color:#000 ; border:0 ; padding:4px 6px ; font-weight:bold ; font-size:100% }
+button { background:#ff5 ; color:#000 ; border:0 ; padding:4px 6px ; font-weight:bold ; font-size:100% ; margin-left:1em }
 button:hover { cursor:pointer }
 
 code { font-family:"Noto Mono", "Lucida Console", monospace ; padding:0 }
@@ -10,11 +11,11 @@ form { display:inline-block }
 
 h1 { font-size:150% ; margin:0 0 1em ; color:#fff }
 
-input { width:20em ; margin-bottom:1em ; background:0 ; color:#eee ; border:1px dotted #ff5 ; font-family:"Noto Mono", Arial, sans-serif }
+input { margin-bottom:1em ; background:0 ; color:#eee ; border:1px dotted #ff5 ; font-family:"Noto Mono", Arial, sans-serif }
 
-input[type=checkbox] { width:1em ; margin-left:2em }
+input#url { width:60em }
 
-input[type=range] { -webkit-appearance:none ; border:1px dotted #ff5 }
+input[type=range] { -webkit-appearance:none ; width:400px }
 input[type=range]::-webkit-slider-runnable-track { height:1px ; background:#ff5 ; border:none }
 input[type=range]::-webkit-slider-thumb { -webkit-appearance:none ; border:2px solid #ff5 ; height:17px ; width:17px ; border-radius:50% ; background:#222 ; margin-top:-9px }
 input[type=range]:focus { outline:none }
@@ -27,5 +28,6 @@ input[type=range]:focus { outline:none }
 
 
 
-#dashboard-section { position:absolute ; left:804px }
+#dashboard-section { position:absolute ; left:550px ; margin-top:6em }
+#dashboard-section div { margin-top:3em }
 

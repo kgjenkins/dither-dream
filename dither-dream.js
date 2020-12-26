@@ -2,8 +2,6 @@
 
 document.addEventListener('DOMContentLoaded', initialize);
 
-var video;
-
 function initialize() {
   // handle slider updates
   document.getElementById('a').addEventListener('input', function() {
@@ -38,31 +36,24 @@ function initialize() {
 
   load_img(document.getElementById('url').value);
   return;
-  
-  navigator.getUserMedia(
-    { video:true, audio:false },
-    function(s) {
-      video = document.getElementById('video');
-      video.src = window.URL.createObjectURL(s);
-      webcamStream=s
-    },
-    function(err){
-      console.log('err');
-    }
-  );
 
 };
 
-function reset() {
-  // TODO reset to default values
-}
-
-function runloop(timestamp) {
-  var elapsed;
-  do {
-    elapsed = performance.now() - timestamp;
-  } while (elapsed < 500);
-  window.requestAnimationFrame(runloop);
+function reset(target) {
+  //reset to default values
+  document.getElementById('a').value = 7;
+  document.getElementById('a-label').innerHTML = 7;
+  document.getElementById('b').value = 3;
+  document.getElementById('b-label').innerHTML = 3;
+  document.getElementById('c').value = 5;
+  document.getElementById('c-label').innerHTML = 5;
+  document.getElementById('d').value = 1;
+  document.getElementById('d-label').innerHTML = 1;
+  document.getElementById('contrast').value = 0;
+  document.getElementById('contrast-label').innerHTML = 0;
+  weights = [7, 3, 5, 1];
+  dither();
+  target.blur();
 }
 
 var img = new Image();
@@ -74,6 +65,10 @@ function load_img(url) {
   img.onload = function() {
     dither();
   }
+  img.onerror = function(e) {
+    //
+  }
+
 }
 
 function dither() {
