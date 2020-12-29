@@ -11,7 +11,7 @@ Try the [Dither-dream online demo](https://kgjenkins.github.io/dither-dream/)
 
 The [Floyd-Steinberg dithering algorithm](https://en.wikipedia.org/wiki/Floyd%E2%80%93Steinberg_dithering) is a method for reducing an image into a reduced set of colors while attempting to minimize perceptual changes.
 
-Dithering is particulary useful when converting to a bitonal image that only has two colors (like black and white).  For example, consider this original full-color image ("Vanitas with the Spinario" by 17th-century Dutch artist [Pieter Claesz](https://en.wikipedia.org/wiki/Pieter_Claesz)):
+Dithering is particulary useful when converting to a bitonal image that only has two colors (like black and white).  For example, consider this original full-color image (well, the real original was a 17th-century painting, "Vanitas with the Spinario" by the Dutch artist [Pieter Claesz](https://en.wikipedia.org/wiki/Pieter_Claesz)):
 
 ![original color image](image/ex1.original.png)
 
