@@ -86,6 +86,9 @@ function toggleOriginal() {
 
     // display original image
     var scale = 512/img.width;
+    if (img.height*scale < 512) {
+      scale = 512/img.height;
+    }
     screenctx.drawImage(img, 0, 0, Math.floor(img.width*scale), Math.floor(img.height*scale));
     screenctx.showing_original = true;
   }
@@ -101,6 +104,7 @@ function dragOver(e) {
 
 function dropFile(e) {
   e.preventDefault();
+  console.log(e);
   if (e.dataTransfer.files) {
     // assume it is only file
     var file = e.dataTransfer.files[0];
@@ -111,7 +115,11 @@ function dropFile(e) {
       return function(e) {
         f.onload=function() {
           var scale = 512/f.width;
-          screenctx.drawImage(f, 0, 0, Math.floor(img.width*scale), Math.floor(img.height*scale));
+          console.log(f.width, f.height);
+          if (f.height*scale < 512) {
+            scale = 512/f.height;
+          }
+          screenctx.drawImage(f, 0, 0, Math.floor(f.width*scale), Math.floor(f.height*scale));
           dither();
         }
         f.src = e.target.result;
