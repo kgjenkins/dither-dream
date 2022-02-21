@@ -3,6 +3,9 @@
 document.addEventListener('DOMContentLoaded', initialize);
 
 function initialize() {
+  // fix Chrome device pixel ratio
+  document.querySelector('body').style.zoom = `${1 / window.devicePixelRatio * 100}%`;
+  
   // handle slider updates
   document.getElementById('a').addEventListener('input', function() {
     document.getElementById('a-label').innerHTML = this.value;
